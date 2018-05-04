@@ -1,0 +1,32 @@
+program —> declaration-list
+declaration-list —> declaration { declaration }
+declaration —> type-specifier ID dec-tail
+dec-tail -> var-declaration | fun-declaration
+var-declaration —> var-tail
+var-tail —> ; | [ NUM ]
+type-specifier —> int | void
+fun-declaration —> ( params ) compound-stmt
+params —> param-list | void
+param-list —> param {, param}
+param —> type-specifier ID [ [ ] ]
+compound-stmt —> { local-declarations statement-list }
+local-declarations —> empty { var-declaration }
+statement-list —> empty { statement }
+statement —> expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+expression-stmt —> [ expression ] ;
+selection-stmt —> if (expression) statement [else statement]
+iteration-stmt —> while (expression) statement
+return-stmt —> return [expression] ;
+expression —> let var = expression | simple-expression
+var —> [ [expression] ]
+simple-expression —> additive-expression [relop additive-expression]
+relop —> <= | < | > | >= | == | !=
+additive-expression -> term {addop term}
+addop —> + | -
+term —> factor { mulop factor}
+mulop —> * | /
+factor —> ( expression ) | ID fact-tail | NUM
+fact-tail —> var | call
+call —> (args)
+args —> args-list | empty
+args-list —> expression {,expression}
