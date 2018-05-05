@@ -87,12 +87,4 @@ ELSE else
 . {char_count++; char_pos += strlen(yytext); printf("\n!ID Error: %s - line: %d | col:%d\n", yytext, line_count+1, char_pos);}
 \n {line_count++; char_count++; char_pos=0; printf("\n");}
 %%
-
-int main(){
-    yylex();
-    return 0;
-}
-
-// printf("Comment@line %d: %s", line_count, yytext);
-/* [ \t]+ putchar(''); compresses multiple blanks and tabs down to a blank*/
-// {NOTID}         {printf("\n!NOT ID: %s - line: %d | col:%d\n", yytext, line_count, char_pos);char_pos += strlen(yytext);}
+int yywrap(void) { return 1;}

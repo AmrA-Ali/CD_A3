@@ -1,3 +1,15 @@
+%{
+/*Initial C section*/
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int yyerror(char *);
+int yylex(void);
+
+char *g_label;
+%}
+
+
 %token DIGIT
 %token LETTER
 %token ID
@@ -111,13 +123,19 @@ args : arg_list ;
 arg_list : arg_list COMMA expression | expression ;
 %%
 #include <stdio.h>
-#include<lex.yy.c>
-extern char yytext[];
+extern char *yytext;
 extern int column;
 
-yyerror(s)
-char *s;
+int main()
+{
+if(!yyparse())
+		printf("\nParsing complete\n");
+	else
+printf("\nParsing failed\n");
+return 0;
+}
+int yyerror(char *s)
 {
 	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
+	//printf("\n%*s\n%*s\n", column, "^", column, s);
 }

@@ -62,8 +62,18 @@
 
 
 /* Copy the first part of user declarations.  */
+#line 1 "parser.y" /* yacc.c:339  */
 
-#line 67 "y.tab.c" /* yacc.c:339  */
+/*Initial C section*/
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int yyerror(char *);
+int yylex(void);
+
+char *g_label;
+
+#line 77 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -185,7 +195,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 189 "y.tab.c" /* yacc.c:358  */
+#line 199 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -486,7 +496,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    44,    44,    46,    46,    48,    50,    51,    53,    53
+       0,    56,    56,    58,    58,    60,    62,    63,    65,    65
 };
 #endif
 
@@ -1262,7 +1272,7 @@ yyreduce:
   switch (yyn)
     {
       
-#line 1266 "y.tab.c" /* yacc.c:1646  */
+#line 1276 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1490,16 +1500,22 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 112 "parser.y" /* yacc.c:1906  */
+#line 124 "parser.y" /* yacc.c:1906  */
 
 #include <stdio.h>
-#include<lex.yy.c>
-extern char yytext[];
+extern char *yytext;
 extern int column;
 
-yyerror(s)
-char *s;
+int main()
+{
+if(!yyparse())
+		printf("\nParsing complete\n");
+	else
+printf("\nParsing failed\n");
+return 0;
+}
+int yyerror(char *s)
 {
 	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
+	//printf("\n%*s\n%*s\n", column, "^", column, s);
 }
